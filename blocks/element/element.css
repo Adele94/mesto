@@ -1,0 +1,7 @@
+.element {
+  max-width: 282px;
+  background-color: white;
+  border-radius: 10px;
+  border-color: black;
+  box-sizing: border-box;
+}
