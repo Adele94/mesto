@@ -15,7 +15,7 @@
     grid-template-columns: 1fr min-content;
     grid-template-rows: max-content max-content;
     margin: 26px auto 0;
-    padding-left: 28px;   
+    padding-left: 28px;
     column-gap: 10px;
     row-gap: 14px;
   }
