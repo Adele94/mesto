@@ -10,6 +10,22 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
+  box-sizing: border-box;
 
   color: #FFFFFF;
+}
+
+.popup__save:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 768px) {
+  .popup__save  {
+    margin-top: 45px;
+    padding-bottom: 14px;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }

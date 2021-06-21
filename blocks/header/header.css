@@ -5,6 +5,12 @@
 }
 
 
+@media screen and (max-width: 879px) {
+  .header {
+    max-width: calc(((100% - 581px)/4) * 2 + 17px + 564px);
+  }
+}
+
 @media screen and (max-width: 768px) {
   .header {
     padding-top: 28px;

@@ -7,7 +7,18 @@
   color: #FFFFFF;
   margin: 0;
   padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 520px;
 }
+
+@media screen and (max-width: 879px) {
+  .profile__description {
+    max-width: 320px;
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   .profile__description  {
@@ -15,5 +26,6 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
+    align-self: center;
   }
 }

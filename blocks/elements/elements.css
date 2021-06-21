@@ -10,3 +10,9 @@
     justify-items: center;
     padding-bottom: 67px;
 }
+
+@media screen and (max-width: 768px) {
+    .elements  {
+      padding-bottom: 48px;
+    }
+  }
