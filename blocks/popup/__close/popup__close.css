@@ -1,4 +1,8 @@
 .popup__close {
+  margin: 0;
+  padding: 0;
+  top: -40px;
+  right: -40px;
   min-width: 40px;
   min-height: 40px;
   background: url(../../../images/Close-Icon.svg);
@@ -6,17 +10,13 @@
   background-position: center;
   background-size: auto;
   border: none;
+  position: absolute;
+  box-sizing: border-box;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: -40px;
-  right: -40px;
-  box-sizing: border-box;
 
 }
 
@@ -28,11 +28,11 @@
 
 @media screen and (max-width: 768px) {
   .popup__close {
+    right: 0;
     min-width: 26px;
     min-height: 26px;
     background: url(../../../images/Close-Icon-small.svg);
     background-repeat: no-repeat;
     background-position: center;
-    right: 0;
   }
 }

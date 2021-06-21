@@ -1,8 +1,8 @@
 .page {
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  background-color: black;
+  margin: 0 auto;
   min-width: 320px;
   max-width: 1280px;
-  margin: 0 auto;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  background-color: black;
   box-sizing: border-box;
 }

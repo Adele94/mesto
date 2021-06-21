@@ -1,14 +1,13 @@
 .profile__button_add {
-  background-color: black;
+  margin: 0 0 0 auto;
+  padding: 0;
   min-height: 50px;
   min-width: 150px;
+  background-color: black;
   font-size: 22px;
   border: 2px solid #FFFFFF;
   box-sizing: border-box;
   border-radius: 2px;
-  margin: 0;
-  margin-left: auto;
-  padding: 0;
 }
 
 .profile__button_add:hover {

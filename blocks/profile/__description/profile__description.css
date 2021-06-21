@@ -1,16 +1,16 @@
 .profile__description {
-  font-family: Inter;
+  margin: 0;
+  padding: 0;
+  max-width: 520px;
+  font-family: Inter, 'Helvetica Neue', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
   color: #FFFFFF;
-  margin: 0;
-  padding: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 520px;
 }
 
 @media screen and (max-width: 879px) {

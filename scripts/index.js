@@ -1,4 +1,3 @@
-// Делаем выборку DOM элементов
 const popupOpenButtonElement = document.querySelector('.profile__button_edit')
 const popupElement = document.querySelector('.popup')
 const popupCloseButtonElement = popupElement.querySelector('.popup__close')
