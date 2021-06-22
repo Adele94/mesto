@@ -9,8 +9,7 @@
 <body class="body">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="./images/logo.png" alt="Логотип">
-      <div class="header__line"></div>
+      <img class="header__logo" src="./images/logo.svg" alt="Логотип">
     </header>
     <main class="content">
       <section class="profile">
@@ -21,7 +20,7 @@
           <p class="profile__description">Исследователь океана</p>
         </div>
         <button class="profile__button-add" type="button">
-          <img src="images/plus.png" alt="Знак '+'">
+          <img src="images/plus.svg" alt="Знак '+'">
         </button>
       </section>
       <section class="elements">
@@ -29,42 +28,42 @@
           <img class="element__image" src="./images/Hong-Kong.jpg" alt="Гонк-Конг">
           <div class="element__info">
             <h2 class="element__text">Китай, Гонк-Конг</h2>
-            <button class="element__like" type="button" onclick="likeClick(event)"></button>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/China.jpg" alt="Китай">
           <div class="element__info">
             <h2 class="element__text">Китай</h2>
-            <button class="element__like" type="button" onclick="likeClick(event)"></button>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/Japan.jpg" alt="Япония">
           <div class="element__info">
             <h2 class="element__text">Япония</h2>
-            <button class="element__like" type="button" onclick="likeClick(event)"></button>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/Italy.jpg" alt="Италия">
           <div class="element__info">
             <h2 class="element__text">Италия</h2>
-            <button class="element__like" type="button" onclick="likeClick(event)"></button>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/Germany.jpg" alt="Германия">
           <div class="element__info">
             <h2 class="element__text">Германия</h2>
-            <button class="element__like" type="button" onclick="likeClick(event)"></button>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/Netherlands.jpg" alt="Нидерланды">
           <div class="element__info">
             <h2 class="element__text">Нидерланды</h2>
-            <button class="element__like" type="button" onclick="likeClick(event)"></button>
+            <button class="element__like" type="button"></button>
           </div>
         </div>
       </section>
@@ -74,13 +73,11 @@
     </footer>
     <section class="popup">
       <div class="popup__container">
-        <button class="popup__close"></button>
-        <form class="popup__content">
-          <h3 class="popup__title">Редактировать профиль</h3>
-          <input type="text" class="popup__input popup__input_name" value ="Жак-Ив Кусто" name="name">
-          <div class="popup__line"></div>
-          <input type="text" class="popup__input popup__input_description" value ="Исследователь океана" name="description">
-          <div class="popup__line"></div>
+        <button class="popup__close" type="button"></button>        
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form class="popup__content" name="bio">
+          <input type="text" class="popup__input popup__input_bio_name" value ="Жак-Ив Кусто" name="name">
+          <input type="text" class="popup__input popup__input_bio_description" value ="Исследователь океана" name="description">
           <button type="submit" class="popup__save">Сохранить</button>
         </form>
       </div>
