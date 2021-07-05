@@ -26,6 +26,7 @@
       <section class="elements">
         <div class="element">
           <img class="element__image" src="./images/Hong-Kong.jpg" alt="Гонк-Конг">
+          <button class="element__trash" type="button"></button>
           <div class="element__info">
             <h2 class="element__text">Китай, Гонк-Конг</h2>
             <button class="element__like" type="button"></button>
@@ -33,6 +34,7 @@
         </div>
         <div class="element">
           <img class="element__image" src="./images/China.jpg" alt="Китай">
+          <button class="element__trash" type="button"></button>
           <div class="element__info">
             <h2 class="element__text">Китай</h2>
             <button class="element__like" type="button"></button>
@@ -40,6 +42,7 @@
         </div>
         <div class="element">
           <img class="element__image" src="./images/Japan.jpg" alt="Япония">
+          <button class="element__trash" type="button"></button>
           <div class="element__info">
             <h2 class="element__text">Япония</h2>
             <button class="element__like" type="button"></button>
@@ -47,6 +50,7 @@
         </div>
         <div class="element">
           <img class="element__image" src="./images/Italy.jpg" alt="Италия">
+          <button class="element__trash" type="button"></button>
           <div class="element__info">
             <h2 class="element__text">Италия</h2>
             <button class="element__like" type="button"></button>
@@ -54,6 +58,7 @@
         </div>
         <div class="element">
           <img class="element__image" src="./images/Germany.jpg" alt="Германия">
+          <button class="element__trash" type="button"></button>
           <div class="element__info">
             <h2 class="element__text">Германия</h2>
             <button class="element__like" type="button"></button>
@@ -61,6 +66,7 @@
         </div>
         <div class="element">
           <img class="element__image" src="./images/Netherlands.jpg" alt="Нидерланды">
+          <button class="element__trash" type="button"></button>
           <div class="element__info">
             <h2 class="element__text">Нидерланды</h2>
             <button class="element__like" type="button"></button>
@@ -74,14 +80,26 @@
     <section class="popup">
       <div class="popup__container">
         <button class="popup__close" type="button"></button>        
-        <h3 class="popup__title">Редактировать профиль</h3>
+        <h3 class="popup__title"></h3>
         <form class="popup__content" name="bio">
-          <input type="text" class="popup__input popup__input_bio_name" value ="Жак-Ив Кусто" name="name">
-          <input type="text" class="popup__input popup__input_bio_description" value ="Исследователь океана" name="description">
-          <button type="submit" class="popup__save">Сохранить</button>
+          <input type="text" class="popup__input popup__input_bio_name" value ="" name="name">
+          <input type="text" class="popup__input popup__input_bio_description" value ="" name="description">
+          <button type="submit" class="popup__save"></button>
         </form>
       </div>
-    </section>
+    </section> 
+  <!--
+  <template class="item-template">
+      <li class="list__item item">
+        <span class="item__text"></span>        
+          <button class="item__control item__control_type_edit"></button>
+          <button class="item__control item__control_type_duplicate"></button>
+          <button class="item__control item__control_type_delete"></button>
+
+      </li>
+    </template>
+  
+  -->
   </div>
   <script src="./scripts/index.js"></script>
 </body>
