@@ -24,54 +24,16 @@
         </button>
       </section>
       <section class="elements">
-        <div class="element">
-          <img class="element__image" src="./images/Hong-Kong.jpg" alt="Гонк-Конг">
-          <button class="element__trash" type="button"></button>
-          <div class="element__info">
-            <h2 class="element__text">Китай, Гонк-Конг</h2>
-            <button class="element__like" type="button"></button>
+        <template class="element-template">
+          <div class="element">
+            <img class="element__image" src="" alt="">
+            <button class="element__trash" type="button"></button>
+            <div class="element__info">
+              <h2 class="element__text"></h2>
+              <button class="element__like" type="button"></button>
+            </div>
           </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="./images/China.jpg" alt="Китай">
-          <button class="element__trash" type="button"></button>
-          <div class="element__info">
-            <h2 class="element__text">Китай</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="./images/Japan.jpg" alt="Япония">
-          <button class="element__trash" type="button"></button>
-          <div class="element__info">
-            <h2 class="element__text">Япония</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="./images/Italy.jpg" alt="Италия">
-          <button class="element__trash" type="button"></button>
-          <div class="element__info">
-            <h2 class="element__text">Италия</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="./images/Germany.jpg" alt="Германия">
-          <button class="element__trash" type="button"></button>
-          <div class="element__info">
-            <h2 class="element__text">Германия</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="./images/Netherlands.jpg" alt="Нидерланды">
-          <button class="element__trash" type="button"></button>
-          <div class="element__info">
-            <h2 class="element__text">Нидерланды</h2>
-            <button class="element__like" type="button"></button>
-          </div>
-        </div>
+        </template>
       </section>
     </main>
     <footer class="footer">
@@ -88,7 +50,26 @@
         </form>
       </div>
     </section> 
-  <!--
+    <section class="popup popup__type_image">
+      <div class="popup-temlate">
+        <form class="popup__picture" name="picture">
+          <button class="popup__close" type="button"></button>    
+          <img class="popup__image" src="" alt="">
+          <h3 class="popup__image-title"></h3>
+        </form>
+      </div>
+    </section>
+      <!--
+
+            <section class="popup popup__type_image">
+        <form class="popup__content" name="bio">
+          <button class="popup__close" type="button"></button>    
+          <h3 class="popup__title"></h3>
+          <img class="popup__image" src="file:///C:/Users/throu/Desktop/dev/mesto/images/Netherlands.jpg" alt="ывы">
+        </form>
+    </section>
+
+
   <template class="item-template">
       <li class="list__item item">
         <span class="item__text"></span>        
