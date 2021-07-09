@@ -100,7 +100,7 @@ function handleSave (evt) {
     evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = descriptionInput.value;
-    closePopup();
+    closePopup(evt);
 }
 
 function handleSubmit(evt) {
@@ -109,8 +109,10 @@ function handleSubmit(evt) {
     name: placeNameInput.value, 
     link: placelinkInput.value
   };
-
   renderCard(item);
+  placeNameInput.value = "";
+  placelinkInput.value = "";
+  closePopup(evt);
 }
 
 function handleDelete(event) {
