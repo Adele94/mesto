@@ -29,15 +29,15 @@ let profile = document.querySelector(".profile");
 let profileName = profile.querySelector(".profile__name");
 let profileDescription = profile.querySelector(".profile__description");
 
-const popupEdit = document.querySelector(".popup__type_edit");
+const popupEdit = document.querySelector(".popup__type-edit");
 let nameInput = popupEdit.querySelector(".popup__input_edit_name");
 let descriptionInput = popupEdit.querySelector(".popup__input_edit_description");
 
-const popupPlace = document.querySelector(".popup__type_place");
+const popupPlace = document.querySelector(".popup__type-place");
 let placeNameInput = popupPlace.querySelector(".popup__input_place_name");
 let placelinkInput = popupPlace.querySelector(".popup__input_place_link");
 
-const popupImage = document.querySelector(".popup__type_image");
+const popupImage = document.querySelector(".popup__type-image");
 
 profile.querySelector(".profile__button-edit").addEventListener('click', openEditPopup);
 profile.querySelector(".profile__button-add").addEventListener('click', openPlacePopup);
