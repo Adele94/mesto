@@ -52,7 +52,7 @@ popupImage.querySelector(".popup__close").addEventListener('click', () => closeP
 popupEdit.addEventListener('submit', handleSave);
 popupPlace.addEventListener('submit', handleSubmit);
 
-function setEventListeners(itemElement) {
+function setCardEventListeners(itemElement) {
   itemElement.querySelector(".element__image").addEventListener("click", openImagePopup);
   itemElement.querySelector(".element__trash").addEventListener("click", handleDelete);
   itemElement.querySelector(".element__like").addEventListener("click", handleLike);
@@ -79,7 +79,7 @@ function openImagePopup(event) {
   element.querySelector(".popup__image").src = event.target.src;
   element.querySelector(".popup__image").alt = event.target.alt;
   element.querySelector(".popup__close").addEventListener("click", () => closePopup(popupImage));
-  popupImage.classList.add("popup_is-opened");
+  openPopup(popupImage);
 }
 
 function createCard(element){
@@ -88,7 +88,7 @@ function createCard(element){
   card.querySelector(".element__image").src = element.link;
   card.querySelector(".element__image").alt = element.name;
     
-  setEventListeners(card);
+  setCardEventListeners(card);
   return card;
 }
 
