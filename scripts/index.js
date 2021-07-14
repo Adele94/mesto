@@ -48,6 +48,7 @@ profile.querySelector(".profile__button-add").addEventListener('click', () => op
 popupEdit.querySelector(".popup__close").addEventListener('click', () => closePopup(popupEdit));
 popupPlace.querySelector(".popup__close").addEventListener('click', () => closePopup(popupPlace));
 popupImage.querySelector(".popup__close").addEventListener('click', () => closePopup(popupImage));
+let popupSelector;
 
 popupEdit.addEventListener('submit', handleSave);
 popupPlace.addEventListener('submit', handleSubmit);
@@ -60,10 +61,30 @@ function setCardEventListeners(itemElement) {
 
 function closePopup(modal) {
   modal.classList.remove('popup_is-opened');
+  modal.removeEventListener('click', closePopupByClickOnOverlay);
+  modal.removeEventListener('keydown',closePopupByClickOnEsc);
+}
+
+const closePopupByClickOnOverlay = function(event) {
+  if (event.target !== event.currentTarget) {
+    return
+  }
+  const popupElement = event.target.closest(".popup");
+
+  closePopup(popupElement);
+}
+
+const closePopupByClickOnEsc = function(event) {
+  if (event.code === 'Escape') {
+    closePopup(popupSelector);
+  }
 }
 
 function openPopup(modal) {
   modal.classList.add('popup_is-opened');
+  modal.addEventListener('click', closePopupByClickOnOverlay);
+  popupSelector = modal;
+  modal.addEventListener('keydown', closePopupByClickOnEsc);
 }
 
 function openProfileModal() {
@@ -71,7 +92,6 @@ function openProfileModal() {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
 }
-
 
 function openImagePopup(event) {
   const element = popupImage.querySelector(".popup-content");
@@ -137,3 +157,5 @@ function handleLike(event) {
 }
 
 renderCards(initialCards);
+
+document.addEventListener('keydown', closePopupByClickOnEsc); 
