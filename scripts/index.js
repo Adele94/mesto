@@ -62,7 +62,7 @@ function setCardEventListeners(itemElement) {
 function openPopup(modal) {
   modal.classList.add('popup_is-opened');
   modal.addEventListener('click', closePopupByClickOnOverlay);
-  modal.addEventListener('keydown', closePopupByClickOnEsc);
+  document.addEventListener('keydown', closePopupByClickOnEsc);
 }
 
 function openProfileModal() {
@@ -94,7 +94,7 @@ function closePopup() {
   const popupActive = document.querySelector('.popup_is-opened');
   popupActive.classList.remove('popup_is-opened');
   popupActive.removeEventListener('click', closePopupByClickOnOverlay);
-  popupActive.removeEventListener('keydown',closePopupByClickOnEsc);
+  document.removeEventListener('keydown',closePopupByClickOnEsc);
 }
 
 const closePopupByClickOnOverlay = function(event) {
