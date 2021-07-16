@@ -4,7 +4,7 @@ const showInputError = (inputElement, errorMessage) => {
 
   errorElement.textContent = errorMessage;
   errorElement.classList.add("popup__input-error_active");
-  inputElement.setAttribute("style", "border-bottom: 1px solid #FF0000;");
+  inputElement.classList.add("popup__input-underline");
 };
 
 const hideInputError = (inputElement) => {
@@ -13,7 +13,7 @@ const hideInputError = (inputElement) => {
 
   errorElement.textContent = "";
   errorElement.classList.remove("popup__input-error_active");
-  inputElement.removeAttribute("style", "border-bottom: 1px solid #FF0000;");
+  inputElement.classList.remove("popup__input-underline");
 };
 
 const getErrorMessage = (inputElement) => {

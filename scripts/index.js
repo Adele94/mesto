@@ -45,9 +45,9 @@ const popupImage = document.querySelector(".popup_type_picture");
 profile.querySelector(".profile__button-edit").addEventListener('click', openProfileModal);
 profile.querySelector(".profile__button-add").addEventListener('click', () => openPopup(popupPlace));
 
-popupEdit.querySelector(".popup__close").addEventListener('click', closePopup);
-popupPlace.querySelector(".popup__close").addEventListener('click', closePopup);
-popupImage.querySelector(".popup__close").addEventListener('click', closePopup);
+popupEdit.querySelector(".popup__close").addEventListener('click', () => closePopup(popupEdit));
+popupPlace.querySelector(".popup__close").addEventListener('click', () => closePopup(popupPlace));
+popupImage.querySelector(".popup__close").addEventListener('click', () => closePopup(popupImage));
 
 
 popupEdit.addEventListener('submit', handleSave);
@@ -77,7 +77,7 @@ function openProfileModal() {
   const popupInputSections = Array.from(popupEdit.querySelectorAll(".popup__input-section"));
   popupInputSections.forEach( (popupInputSection) => {
     popupInputSection.querySelector(".popup__input-error").classList.remove("popup__input-error_active");
-    popupInputSection.querySelector(".popup__input").removeAttribute("style", "border-bottom: 1px solid #FF0000;");
+    popupInputSection.querySelector(".popup__input").classList.remove("popup__input-underline");
   });
 }
 
@@ -86,14 +86,14 @@ function openImagePopup(event) {
   element.querySelector(".popup__image-title").textContent = event.target.alt;
   element.querySelector(".popup__image").src = event.target.src;
   element.querySelector(".popup__image").alt = event.target.alt;
-  element.querySelector(".popup__close").addEventListener("click", closePopup);
+  element.querySelector(".popup__close").addEventListener("click",  () => closePopup(popupImage));
   openPopup(popupImage);
 }
 
-function closePopup() {
-  const popupActive = document.querySelector('.popup_is-opened');
-  popupActive.classList.remove('popup_is-opened');
-  popupActive.removeEventListener('click', closePopupByClickOnOverlay);
+function closePopup(modal) {
+  
+  modal.classList.remove('popup_is-opened');
+  modal.removeEventListener('click', closePopupByClickOnOverlay);
   document.removeEventListener('keydown',closePopupByClickOnEsc);
 }
 
@@ -101,12 +101,14 @@ const closePopupByClickOnOverlay = function(event) {
   if (event.target !== event.currentTarget) {
     return
   }
-  closePopup();
+  const popupActive = document.querySelector('.popup_is-opened');
+  closePopup(popupActive);
 }
 
 const closePopupByClickOnEsc = function(event) {
   if (event.code === 'Escape') {
-    closePopup();
+    const popupActive = document.querySelector('.popup_is-opened');
+    closePopup(popupActive);
   }
 }
 
@@ -150,7 +152,7 @@ function handleSubmit(evt) {
   buttonSave.setAttribute("disabled", true);
   buttonSave.classList.add("popup__save_inactive");
 
-  closePopup();
+  closePopup(popupPlace);
 }
 
 function handleDelete(event) {
