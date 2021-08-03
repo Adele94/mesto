@@ -1,3 +1,6 @@
+import {Card} from './Card.js'
+import {FormValidator} from './FormValidator.js'
+
 const initialCards = [
   {
     name: 'Китай, Гонк-Конг',
@@ -53,12 +56,13 @@ popupImage.querySelector(".popup__close").addEventListener('click', () => closeP
 popupEdit.addEventListener('submit', handleSave);
 popupPlace.addEventListener('submit', handleSubmit);
 
+/*
 function setCardEventListeners(itemElement) {
   itemElement.querySelector(".element__image").addEventListener("click", openImagePopup);
   itemElement.querySelector(".element__trash").addEventListener("click", handleDelete);
   itemElement.querySelector(".element__like").addEventListener("click", handleLike);
 }
-
+*/
 function openPopup(modal) {
   modal.classList.add('popup_is-opened');
   modal.addEventListener('click', closePopupByClickOnOverlay);
@@ -80,7 +84,7 @@ function openProfileModal() {
     popupInputSection.querySelector(".popup__input").classList.remove("popup__input-underline");
   });
 }
-
+/*
 function openImagePopup(event) {
   const element = popupImage.querySelector(".popup-content");
   element.querySelector(".popup__image-title").textContent = event.target.alt;
@@ -89,6 +93,7 @@ function openImagePopup(event) {
   element.querySelector(".popup__close").addEventListener("click",  () => closePopup(popupImage));
   openPopup(popupImage);
 }
+*/
 
 function closePopup(modal) {
   
@@ -111,7 +116,7 @@ const closePopupByClickOnEsc = function(event) {
     closePopup(popupActive);
   }
 }
-
+/*
 function createCard(element){
   const card = elementTemplate.cloneNode(true);
   card.querySelector(".element__text").textContent = element.name;
@@ -131,6 +136,17 @@ function renderCards(initialCards){
     renderCard(createCard(item));
   });
 }
+*/
+const renderElements = () => {
+  listElements.innerHTML = '';
+  initialCards.forEach((initialCard) => {
+    const card = new Card(initialCard, '.elements')
+
+    const cardElement = card.generateCard(elementTemplate);
+    listElements.prepend(cardElement);
+  });
+};
+
 
 function handleSave (evt) {
     evt.preventDefault();
@@ -155,6 +171,7 @@ function handleSubmit(evt) {
   closePopup(popupPlace);
 }
 
+/*
 function handleDelete(event) {
   const itemElement = event.target.closest(".element");
 
@@ -166,4 +183,7 @@ function handleLike(event) {
   likeButton.classList.toggle("element__like_active");
 }
 
-renderCards(initialCards);
+*/
+//renderCards(initialCards);
+
+renderElements();
