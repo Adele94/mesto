@@ -23,7 +23,7 @@ class Card {
         element.querySelector(".popup__image").src = event.target.src;
         element.querySelector(".popup__image").alt = event.target.alt;
         element.querySelector(".popup__close").addEventListener("click",  () => closePopup(popupImage));
-
+        
         openPopup(popupImage); // надо импортнуть попап
       }
       
