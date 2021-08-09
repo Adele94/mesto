@@ -1,3 +1,5 @@
+import {openPopup} from './Popup.js';
+
 class Card {
     constructor(data, cardSelector) {
         this._cardSelector = cardSelector;
@@ -6,8 +8,8 @@ class Card {
         this._alt = data.name;
     }
 
-    generateCard(elementTemplate){
-       this._cardElement = elementTemplate.cloneNode(true);
+    createCard(){
+       this._cardElement = this._cardSelector.cloneNode(true);
        this._cardElement.querySelector(".element__text").textContent = this._title;
        this._cardElement.querySelector(".element__image").src = this._link;
        this._cardElement.querySelector(".element__image").alt = this._title;
@@ -22,9 +24,8 @@ class Card {
         element.querySelector(".popup__image-title").textContent = event.target.alt;
         element.querySelector(".popup__image").src = event.target.src;
         element.querySelector(".popup__image").alt = event.target.alt;
-        element.querySelector(".popup__close").addEventListener("click",  () => closePopup(popupImage));
         
-        openPopup(popupImage); // надо импортнуть попап
+        openPopup(popupImage); 
       }
       
     _handleDelete(event) {

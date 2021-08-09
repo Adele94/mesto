@@ -14,8 +14,7 @@
         if (event.target !== event.currentTarget) {
           return
         }
-        const popupActive = document.querySelector('.popup_is-opened');
-        closePopup(popupActive);
+        closePopup(event.currentTarget);
       }
       
      const closePopupByClickOnEsc = function(event) {
@@ -24,3 +23,5 @@
           closePopup(popupActive);
         }
       }
+
+      export {openPopup, closePopup};

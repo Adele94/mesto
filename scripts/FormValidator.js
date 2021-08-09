@@ -1,15 +1,12 @@
 class FormValidator {
     constructor(form, selectors){
-      this.form = form;
-      this.selectors = selectors;
+      this._form = form;
+      this._selectors = selectors;
+      this._inputList = Array.from(document.querySelector(this._form).querySelectorAll(this._selectors));
     }
 
     enableValidation() {
-      const formElements = document.querySelectorAll(this.form);
-      const formList = Array.from(formElements);
-      formList.forEach((formElement) => {
-        this._setEventListeners(formElement);
-      });
+      this._setEventListeners();
     }
 
     _getErrorMessage(inputElement){
@@ -64,9 +61,9 @@ class FormValidator {
       inputElement.classList.remove("popup__input-underline");
     };
 
-    _toggleButtonState(inputList, buttonElement){
+    _toggleButtonState(buttonElement){
       const findAtLeastOneNotValid = (inputElement) => !inputElement.validity.valid;
-      const hasNotValidInput = inputList.some(findAtLeastOneNotValid);
+      const hasNotValidInput = this._inputList.some(findAtLeastOneNotValid);
     
       if (hasNotValidInput) {
         buttonElement.setAttribute("disabled", true);
@@ -77,27 +74,41 @@ class FormValidator {
       }
     };
 
-    _setEventListeners(formElement) {
+    resetValidation() {
+      const formElement = document.querySelector(this._form);
+      const buttonElement = formElement.querySelector(".popup__save");
+      this._toggleButtonState(buttonElement); 
+
+      this._inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement);
+        inputElement.value = "";
+      });
+
+    }
+
+    _setEventListeners() {
       const handleFormSubmit = (event) => {
         event.preventDefault();
       };
+
+      const formElement = document.querySelector(this._form);
       formElement.addEventListener("submit", handleFormSubmit);
     
-      const inputList = Array.from(formElement.querySelectorAll(this.selectors));
+      //const inputList = Array.from(formElement.querySelectorAll(this._selectors));
       const buttonElement = formElement.querySelector(".popup__save");
     
       const inputListIterator = (inputElement) => {
         const handleInput = () => {
           this._checkInputValidity(inputElement);
-          this._toggleButtonState(inputList, buttonElement);
+          this._toggleButtonState(buttonElement);
         };
     
         inputElement.addEventListener("input", handleInput);
       };
     
-      inputList.forEach(inputListIterator);
+      this._inputList.forEach(inputListIterator);
     
-      this._toggleButtonState(inputList, buttonElement);
+      this._toggleButtonState(buttonElement);
     }
 }
 

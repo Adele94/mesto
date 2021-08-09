@@ -1,5 +1,7 @@
-import {Card} from './Card.js'
-import {FormValidator} from './FormValidator.js'
+
+import {openPopup, closePopup} from './Popup.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 
 const initialCards = [
   {
@@ -45,8 +47,15 @@ const placelinkInput = popupPlace.querySelector(".popup__input_place_link");
 
 const popupImage = document.querySelector(".popup_type_picture");
 
+const cardValidation = new FormValidator('.popup_type_place', '.popup__input');
+const profileValidation = new FormValidator('.popup_type_edit', '.popup__input');
+
+cardValidation.enableValidation(); 
+profileValidation.enableValidation(); 
+
+
 profile.querySelector(".profile__button-edit").addEventListener('click', openProfileModal);
-profile.querySelector(".profile__button-add").addEventListener('click', () => openPopup(popupPlace));
+profile.querySelector(".profile__button-add").addEventListener('click', () => { openPopup(popupPlace); cardValidation.resetValidation(); });
 
 popupEdit.querySelector(".popup__close").addEventListener('click', () => closePopup(popupEdit));
 popupPlace.querySelector(".popup__close").addEventListener('click', () => closePopup(popupPlace));
@@ -56,11 +65,7 @@ popupImage.querySelector(".popup__close").addEventListener('click', () => closeP
 popupEdit.addEventListener('submit', handleSave);
 popupPlace.addEventListener('submit', handleSubmit);
 
-const cardValidation = new FormValidator('.popup_type_place', '.popup__input');
-const profileValidation = new FormValidator('.popup_type_edit', '.popup__input');
 
-cardValidation.enableValidation(); 
-profileValidation.enableValidation(); 
 
 function openProfileModal() {
   openPopup(popupEdit);
@@ -81,9 +86,9 @@ function openProfileModal() {
 const renderElements = () => {
   listElements.innerHTML = '';
   initialCards.forEach((initialCard) => {
-    const card = new Card(initialCard, '.elements')
+    const card = new Card(initialCard,elementTemplate)
 
-    const cardElement = card.generateCard(elementTemplate);
+    const cardElement = card.createCard();
     listElements.prepend(cardElement);
   });
 };
@@ -101,8 +106,8 @@ function handleSubmit(evt) {
     name: placeNameInput.value, 
     link: placelinkInput.value
   };
-  const card = new Card(item, '.elements');
-  const cardElement = card.generateCard(elementTemplate);
+  const card = new Card(item, elementTemplate);
+  const cardElement = card.createCard();
   listElements.prepend(cardElement);
 
   popupPlace.querySelector(".popup__content").reset();
