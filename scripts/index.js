@@ -47,8 +47,18 @@ const placelinkInput = popupPlace.querySelector(".popup__input_place_link");
 
 const popupImage = document.querySelector(".popup_type_picture");
 
-const cardValidation = new FormValidator('.popup_type_place', '.popup__input');
-const profileValidation = new FormValidator('.popup_type_edit', '.popup__input');
+const data = { 
+  formSelector: '.popup__content', 
+  inputSelector: '.popup__input', 
+  submitButtonSelector: '.popup__save', 
+  inactiveButtonClass: 'popup__save_inactive',
+  inputErrorClass: 'popup__input-error', 
+  errorClass: 'popup__input-error_active' 
+}; 
+
+const cardValidation = new FormValidator(data, document.querySelector('[name="place"]'));
+const profileValidation = new FormValidator(data, document.querySelector('[name="edit"]'));
+
 
 cardValidation.enableValidation(); 
 profileValidation.enableValidation(); 
@@ -71,25 +81,19 @@ function openProfileModal() {
   openPopup(popupEdit);
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-
-  const buttonSave = popupEdit.querySelector(".popup__save");
-  buttonSave.setAttribute("disabled", false);
-  buttonSave.classList.remove("popup__save_inactive");
-
-  const popupInputSections = Array.from(popupEdit.querySelectorAll(".popup__input-section"));
-  popupInputSections.forEach( (popupInputSection) => {
-    popupInputSection.querySelector(".popup__input-error").classList.remove("popup__input-error_active");
-    popupInputSection.querySelector(".popup__input").classList.remove("popup__input-underline");
-  });
+  profileValidation.enableValidation(); 
 }
 
-const renderElements = () => {
+function renderCard(cardElement) { 
+  listElements.prepend(cardElement) 
+}  
+
+const renderCards = () => {
   listElements.innerHTML = '';
   initialCards.forEach((initialCard) => {
-    const card = new Card(initialCard,elementTemplate)
-
+    const card = new Card(initialCard, elementTemplate);
     const cardElement = card.createCard();
-    listElements.prepend(cardElement);
+    renderCard(cardElement);
   });
 };
 
@@ -112,11 +116,7 @@ function handleSubmit(evt) {
 
   popupPlace.querySelector(".popup__content").reset();
 
-  const buttonSave = popupPlace.querySelector(".popup__save");
-  buttonSave.setAttribute("disabled", true);
-  buttonSave.classList.add("popup__save_inactive");
-
   closePopup(popupPlace);
 }
 
-renderElements();
+renderCards();
