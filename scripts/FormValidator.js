@@ -9,8 +9,9 @@ class FormValidator {
     this._inactiveButtonClass = data.inactiveButtonClass;
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
+    this._errorUnderline = data.errorUnderline;
     this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-    this._submitButton = this._form.querySelector('button[type="submit"]');
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
     }
 
     enableValidation() {
@@ -57,7 +58,7 @@ class FormValidator {
 
       errorElement.textContent = errorMessage;
       errorElement.classList.add(this._errorClass);
-      inputElement.classList.add("popup__input-underline");
+      inputElement.classList.add(this._errorUnderline);
     };
     
     _hideInputError(inputElement){
@@ -65,7 +66,7 @@ class FormValidator {
 
       errorElement.textContent = "";
       errorElement.classList.remove(this._errorClass);
-      inputElement.classList.remove("popup__input-underline");
+      inputElement.classList.remove(this._errorUnderline);
     };
 
     _toggleButtonState(){
@@ -86,7 +87,6 @@ class FormValidator {
 
       this._inputList.forEach((inputElement) => {
         this._hideInputError(inputElement);
-        inputElement.value = "";
       });
     }
 

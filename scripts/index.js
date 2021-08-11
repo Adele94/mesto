@@ -53,7 +53,8 @@ const data = {
   submitButtonSelector: '.popup__save', 
   inactiveButtonClass: 'popup__save_inactive',
   inputErrorClass: 'popup__input-error', 
-  errorClass: 'popup__input-error_active' 
+  errorClass: 'popup__input-error_active',
+  errorUnderline: 'popup__input-underline'
 }; 
 
 const cardValidation = new FormValidator(data, document.querySelector('[name="place"]'));
@@ -65,7 +66,7 @@ profileValidation.enableValidation();
 
 
 profile.querySelector(".profile__button-edit").addEventListener('click', openProfileModal);
-profile.querySelector(".profile__button-add").addEventListener('click', () => { openPopup(popupPlace); cardValidation.resetValidation(); });
+profile.querySelector(".profile__button-add").addEventListener('click',  openPlaceModal);
 
 popupEdit.querySelector(".popup__close").addEventListener('click', () => closePopup(popupEdit));
 popupPlace.querySelector(".popup__close").addEventListener('click', () => closePopup(popupPlace));
@@ -81,19 +82,29 @@ function openProfileModal() {
   openPopup(popupEdit);
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-  profileValidation.enableValidation(); 
+  profileValidation.resetValidation();
+}
+
+function openPlaceModal() {
+  openPopup(popupPlace); 
+  placeNameInput.value = "";
+  placelinkInput.value = "";
+  cardValidation.resetValidation();
 }
 
 function renderCard(cardElement) { 
   listElements.prepend(cardElement) 
 }  
 
+function generateCard(data, template) {
+  const card = new Card(data, template);
+  return card.createCard();
+}
+
 const renderCards = () => {
   listElements.innerHTML = '';
   initialCards.forEach((initialCard) => {
-    const card = new Card(initialCard, elementTemplate);
-    const cardElement = card.createCard();
-    renderCard(cardElement);
+    renderCard(generateCard(initialCard, elementTemplate));
   });
 };
 
@@ -110,10 +121,8 @@ function handleSubmit(evt) {
     name: placeNameInput.value, 
     link: placelinkInput.value
   };
-  const card = new Card(item, elementTemplate);
-  const cardElement = card.createCard();
-  listElements.prepend(cardElement);
-
+  renderCard(generateCard(item, elementTemplate));
+  
   popupPlace.querySelector(".popup__content").reset();
 
   closePopup(popupPlace);
