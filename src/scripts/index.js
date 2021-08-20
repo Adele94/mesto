@@ -1,4 +1,12 @@
 
+import '../pages/index.css';
+import HongKong from '../images/Hong-Kong.jpg'
+import China from '../images/China.png'
+import Japan from '../images/Japan.jpg'
+import Italy from '../images/Italy.jpg'
+import Germany from '../images/Germany.jpg'
+import Netherlands from '../images/Netherlands.jpg'
+
 import {openPopup, closePopup} from './Popup.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
@@ -6,27 +14,27 @@ import {FormValidator} from './FormValidator.js';
 const initialCards = [
   {
     name: 'Китай, Гонк-Конг',
-    link: './images/Hong-Kong.jpg'
+    link: HongKong
   },
   {
     name: 'Китай',
-    link: './images/China.jpg'
+    link: China
   },
   {
     name: 'Япония',
-    link: './images/Japan.jpg'
+    link: Japan
   },
   {
     name: 'Италия',
-    link: './images/Italy.jpg'
+    link: Italy
   },
   {
     name: 'Германия',
-    link: './images/Germany.jpg'
+    link: Germany
   },
   {
     name: 'Нидерланды',
-    link: './images/Netherlands.jpg'
+    link: Netherlands
   }
 ];
 
