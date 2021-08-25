@@ -1,12 +1,10 @@
-import {openPopup} from './Popup.js';
-const popupImage = document.querySelector(".popup_type_picture");
-
 class Card {
-    constructor(data, cardSelector) {
+    constructor(data, cardSelector, handleCardClick) {
         this._cardSelector = cardSelector;
         this._title = data.name;
         this._link = data.link;
         this._alt = data.name;
+        this._handleCardClick = handleCardClick;
     }
 
     createCard(){
@@ -22,17 +20,7 @@ class Card {
     _getTemplate() {
         return this._cardSelector.cloneNode(true);
     }
-    
-    _openImagePopup(event) {
-        
-        const element = popupImage.querySelector(".popup-content");
-        element.querySelector(".popup__image-title").textContent = event.target.alt;
-        element.querySelector(".popup__image").src = event.target.src;
-        element.querySelector(".popup__image").alt = event.target.alt;
-        
-        openPopup(popupImage); 
-      }
-      
+
     _handleDelete(event) {
         const itemElement = event.target.closest(".element");
       
@@ -45,7 +33,7 @@ class Card {
     }
 
     _setEventListeners() {
-        this._cardElement.querySelector(".element__image").addEventListener("click", this._openImagePopup);
+        this._cardElement.querySelector(".element__image").addEventListener("click",() =>  this._handleCardClick(this._link,  this._alt));
         this._cardElement.querySelector(".element__trash").addEventListener("click", this._handleDelete);
         this._cardElement.querySelector(".element__like").addEventListener("click", this._handleLike);
     }

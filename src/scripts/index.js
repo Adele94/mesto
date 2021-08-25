@@ -7,7 +7,11 @@ import Italy from '../images/Italy.jpg'
 import Germany from '../images/Germany.jpg'
 import Netherlands from '../images/Netherlands.jpg'
 
-import {openPopup, closePopup} from './Popup.js';
+import PopupWithForm from './PopupWithForm.js';
+import PopupWithImage from './PopupWithImage.js';
+
+import UserInfo from './UserInfo.js';
+import Section from './Section.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 
@@ -55,85 +59,80 @@ const placelinkInput = popupPlace.querySelector(".popup__input_place_link");
 
 const popupImage = document.querySelector(".popup_type_picture");
 
-const data = { 
-  formSelector: '.popup__content', 
-  inputSelector: '.popup__input', 
-  submitButtonSelector: '.popup__save', 
+const data = {
+  formSelector: '.popup__content',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save',
   inactiveButtonClass: 'popup__save_inactive',
-  inputErrorClass: 'popup__input-error', 
+  inputErrorClass: 'popup__input-error',
   errorClass: 'popup__input-error_active',
   errorUnderline: 'popup__input-underline'
-}; 
+};
 
 const cardValidation = new FormValidator(data, document.querySelector('[name="place"]'));
 const profileValidation = new FormValidator(data, document.querySelector('[name="edit"]'));
 
-
-cardValidation.enableValidation(); 
-profileValidation.enableValidation(); 
-
+cardValidation.enableValidation();
+profileValidation.enableValidation();
 
 profile.querySelector(".profile__button-edit").addEventListener('click', openProfileModal);
 profile.querySelector(".profile__button-add").addEventListener('click',  openPlaceModal);
 
-popupEdit.querySelector(".popup__close").addEventListener('click', () => closePopup(popupEdit));
-popupPlace.querySelector(".popup__close").addEventListener('click', () => closePopup(popupPlace));
-popupImage.querySelector(".popup__close").addEventListener('click', () => closePopup(popupImage));
+let profilePopup = new PopupWithForm(popupEdit, 
+  (evt) => {
+    evt.preventDefault();
+    user.setUserInfo(nameInput.value, descriptionInput.value)
+    profilePopup.close();
+});
 
+let placePopup = new PopupWithForm(popupPlace, 
+  (evt) => {
+    evt.preventDefault();
 
-popupEdit.addEventListener('submit', handleSave);
-popupPlace.addEventListener('submit', handleSubmit);
+  const item  = {
+    name: placeNameInput.value,
+    link: placelinkInput.value
+  };
+  const card = new Card(item, elementTemplate,  (imageScr, imageAlt) => {
+    let imagePopup = new PopupWithImage(popupImage);
+    imagePopup.open(imageScr, imageAlt);
+  });
+    const cardElement = card.createCard();
+    cardList.addItem(cardElement);
 
+  placePopup.close();
+  });
 
+let userData = {
+  name: profile.querySelector(".profile__name"),
+  description: profile.querySelector(".profile__description")
+
+}
+let user = new UserInfo(userData);
 
 function openProfileModal() {
-  openPopup(popupEdit);
+  profilePopup.open();
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
   profileValidation.resetValidation();
 }
 
 function openPlaceModal() {
-  openPopup(popupPlace); 
-  placeNameInput.value = "";
-  placelinkInput.value = "";
+  placePopup.open();
   cardValidation.resetValidation();
 }
 
-function renderCard(cardElement) { 
-  listElements.prepend(cardElement) 
-}  
+const cardList = new Section({
+  items: initialCards,
+  renderer: (cardItem) => {
+    const card = new Card(cardItem, elementTemplate, (imageScr, imageAlt) => {
+      let imagePopup = new PopupWithImage(popupImage);
+      imagePopup.open(imageScr, imageAlt);
+    });
+    const cardElement = card.createCard();
+    cardList.addItem(cardElement);
+    }
+  },
+  listElements); 
 
-function generateCard(data, template) {
-  const card = new Card(data, template);
-  return card.createCard();
-}
-
-const renderCards = () => {
-  listElements.innerHTML = '';
-  initialCards.forEach((initialCard) => {
-    renderCard(generateCard(initialCard, elementTemplate));
-  });
-};
-
-function handleSave (evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileDescription.textContent = descriptionInput.value;
-    closePopup(popupEdit);
-}
-
-function handleSubmit(evt) {
-  evt.preventDefault();
-  const item  = {
-    name: placeNameInput.value, 
-    link: placelinkInput.value
-  };
-  renderCard(generateCard(item, elementTemplate));
-  
-  popupPlace.querySelector(".popup__content").reset();
-
-  closePopup(popupPlace);
-}
-
-renderCards();
+  cardList.renderItems(); 
