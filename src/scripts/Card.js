@@ -17,9 +17,15 @@ class Card {
        return this._cardElement;
     }
      
+    
     _getTemplate() {
-        return this._cardSelector.cloneNode(true);
-    }
+        const cardElement = document
+          .querySelector(this._cardSelector)
+          .content
+          .querySelector('.element')
+          .cloneNode(true);
+        return cardElement;
+      }
 
     _handleDelete(event) {
         const itemElement = event.target.closest(".element");
@@ -33,7 +39,7 @@ class Card {
     }
 
     _setEventListeners() {
-        this._cardElement.querySelector(".element__image").addEventListener("click",() =>  this._handleCardClick(this._link,  this._alt));
+        this._cardElement.querySelector(".element__image").addEventListener("click",() =>  this._handleCardClick());
         this._cardElement.querySelector(".element__trash").addEventListener("click", this._handleDelete);
         this._cardElement.querySelector(".element__like").addEventListener("click", this._handleLike);
     }

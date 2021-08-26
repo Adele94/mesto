@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry: './src/scripts/index.js',
+    entry: './src/pages/index.js',
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'), //поменяли contentBase на static
         compress: true,

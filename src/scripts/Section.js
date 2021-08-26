@@ -12,7 +12,6 @@ export default class Section {
 
     //Отрисовка всех элементов, renderCards)
     renderItems(){
-        this._container.innerHTML = '';
         this._items.forEach((item) => {
         this._renderer(item);
         });

@@ -21,12 +21,8 @@ class FormValidator {
     _getErrorMessage(inputElement){
       const defaultErrorHandler = (inputElement) => inputElement.validationMessage;
       const urlErrorHandler = (inputElement) => {
-        if (inputElement.validity.typeMismatch) {
-          return "Введите адрес сайта.";
-        }
-    
-        if (inputElement.validity.valueMissing) {
-          return "Вы пропустили это поле.";
+        if (inputElement.validity.typeMismatch || inputElement.validity.valueMissing) {
+          return inputElement.validationMessage;
         }
       };
       const errorHandlers = {
