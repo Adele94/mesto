@@ -5,4 +5,14 @@
   top: 155.25px;
   border-radius: 50%;
   border: none;
+
+}
+
+.profile__avatar:hover {
+  opacity: 0.3;
+  background-image: url(../../../images/Vector-avatar.svg);
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  background-position: center;
 }

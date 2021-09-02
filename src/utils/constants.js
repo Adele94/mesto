@@ -12,6 +12,9 @@ export const popupPlace = document.querySelector(".popup_type_place");
 
 export const popupImage = document.querySelector(".popup_type_picture");
 
+export const popupDelete = document.querySelector(".popup_type_delete-card");
+
+
 export const data = {
   formSelector: '.popup__content',
   inputSelector: '.popup__input',

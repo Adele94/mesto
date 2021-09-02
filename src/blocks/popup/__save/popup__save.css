@@ -12,7 +12,7 @@
   line-height: 22px;
   text-align: center;
   box-sizing: border-box;
-
+  min-width: 358px;
   color: #FFFFFF;
 }
 
@@ -24,6 +24,7 @@
 
 @media screen and (max-width: 768px) {
   .popup__save  {
+    min-width: 238px;
     max-height: 46px;
     margin-top: 45px;
     padding-bottom: 14px;

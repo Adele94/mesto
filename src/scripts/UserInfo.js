@@ -2,12 +2,14 @@ export default class UserInfo {
     constructor(user) {
       this._userName = user.name;
       this._description = user.description;
+      this._profileUserID = user.id;
     }
 
     getUserInfo() {
         const  user = {
             name: this._userName,
-            description: this._description 
+            description: this._description,
+            id: this._profileUserID
         }
         return user; 
     }
