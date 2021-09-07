@@ -12,7 +12,10 @@
     </header>
     <main class="content">
       <section class="profile">
-        <button class=profile__avatar-edit style='margin: 0; padding: 0; background-color: black; border-style: none;'><img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар"></button>
+        <button class="profile__avatar-button">
+          <img class="profile__avatar" src="" alt="Аватар">
+          <img class="profile__avatar-edit" src="<%=require('./images/Vector-avatar.svg')%>"></img>
+        </button>
         <div class="profile__info">
           <h1 class="profile__name"></h1>
           <button class="profile__button-edit" type="button"></button>
@@ -47,11 +50,11 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__content" name="edit" novalidate>
           <section class="popup__input-section">
-            <input type="text" class="popup__input popup__input_edit_name" value ="Жак-Ив Кусто" name="name" placeholder = "Имя" required minlength="2" maxlength="40">
+            <input type="text" class="popup__input popup__input_edit_name" value ="" name="name" placeholder = "Имя" required minlength="2" maxlength="40">
             <span class="popup__input-error name-input-error"></span>
           </section>
           <section class="popup__input-section">
-            <input type="text" class="popup__input popup__input_edit_description" value ="Исследователь океана" name="description" placeholder = "О себе" required minlength="2" maxlength="200">
+            <input type="text" class="popup__input popup__input_edit_description" value ="" name="description" placeholder = "О себе" required minlength="2" maxlength="200">
             <span class="popup__input-error description-input-error"></span>
           </section>
           <button type="submit" class="popup__save">Сохранить</button>
@@ -88,18 +91,22 @@
       <div class="popup__container">
         <button class="popup__close" type="button"></button>        
         <h2 class="popup__title">Вы уверены?</h2>
-        <button type="submit" class="popup__save" style="margin-top:38px">Да</button>
+        <form class="popup__content" name="avatar" novalidate>
+          <button type="submit" class="popup__save" style="margin-top:38px">Да</button>
+        </form>
       </div>
     </section>
     <section class="popup popup_type_avatar">
       <div class="popup__container">
         <button class="popup__close" type="button"></button>        
         <h2 class="popup__title">Обновить аватар</h2>
-        <section class="popup__input-section">
-          <input type="url" class="popup__input popup__input_place_link" value ="" name="link" placeholder = "Ссылка на аватар" required>
-          <span class="popup__input-error link-input-error"></span>
-        </section>
-        <button type="submit" class="popup__save">Сохранить</button>
+        <form class="popup__content" name="avatar" novalidate>
+          <section class="popup__input-section">
+            <input type="url" class="popup__input popup__input_place_link" value ="" name="link" placeholder = "Ссылка на аватар" required>
+            <span class="popup__input-error link-input-error"></span>
+          </section>
+          <button type="submit" class="popup__save">Сохранить</button>
+      </form>
       </div>
     </section>
   </div>

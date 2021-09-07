@@ -21,8 +21,6 @@ export default class Api {
           });
       }
 
-
-
     //получаем данные пользователя
     getUserProfile() {
       return fetch(this.url + '/users/me', {
@@ -73,8 +71,6 @@ export default class Api {
         });
     }
 
-  
-
       //обновляем данные пользователя
       updateUserProfile(userName, userAbout) {
         return fetch(this.url + '/users/me', {     
@@ -95,15 +91,31 @@ export default class Api {
           });
         }
 
+      //обновляем аватар пользователя
+      updateAvatarProfile(avatarUrl) {
+        return fetch(this.url + '/users/me/avatar', {     
+          headers: this.headers,
+          method: 'PATCH',
+          body: JSON.stringify({
+            avatar: avatarUrl
+          })
+        })
+        .then(res => {
+            if (res.ok) {
+              return res.json()
+            }
+      
+            // если ошибка, отклоняем промис
+            return Promise.reject(`Ошибка: ${res.status}`);
+          });
+        }
+
+
       //добавление лайка на крточку
       addLikes(cardID) {
         return fetch(this.url + '/cards/likes/' + cardID, {
           headers: this.headers,
-          method: 'PUT',
-          /*body: JSON.stringify({
-            name: userName,
-            about: userAbout
-          })*/
+          method: 'PUT'
         })
         .then(res => {
             if (res.ok) {
@@ -119,11 +131,7 @@ export default class Api {
       removeLikes(cardID) {
         return fetch(this.url + '/cards/likes/' + cardID, {
           headers: this.headers,
-          method: 'DELETE',
-          /*body: JSON.stringify({
-            name: userName,
-            about: userAbout
-          })*/
+          method: 'DELETE'
         })
         .then(res => {
             if (res.ok) {

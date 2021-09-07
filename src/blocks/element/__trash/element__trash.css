@@ -11,6 +11,7 @@
   min-height: 19px;
   align-self: flex-end;
   position: absolute;
+  visibility: hidden;
 }
   
 .element__trash:hover {
