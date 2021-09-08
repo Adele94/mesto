@@ -43,17 +43,17 @@ Promise.all([api.getUserProfile(),api.getInitialCards()])
         link: element.link,
         likes: element.likes,
         likesCount: element.likes.length,
-        ownerID: element.owner._id,
+        owner: element.owner,
         profileUserID: profileUserID,
-        cardID: element._id
+        _id: element._id
      })
       ;
   });
   
    cardList = new Section({
     items: initialCards,
-    renderer: ({name, link, likes, cardID, ownerID, profileUserID}) => {
-      const cardElement = createNewCard({name, link, likes, cardID, ownerID, profileUserID} );
+    renderer: ({name, link, likes, _id, owner, profileUserID}) => {
+      const cardElement = createNewCard({name, link, likes, _id, owner}, profileUserID );
       cardList.addItem(cardElement);
       }
     },
@@ -76,9 +76,12 @@ Promise.all([api.getUserProfile(),api.getInitialCards()])
 
     //добавляем карточку
     api.addNewCard(item)
-    .then( () => {
+    .then( (res) => {
+      console.log("RESULT API");
+      console.log(res);
       popupPlace.querySelector('[type="submit"]').textContent = "Создать";
-      const cardElement = createNewCard(item);
+      //const cardElement = createNewCard(item);
+      const cardElement = createNewCard(res, profileUserID);
       cardList.addItem(cardElement);
       placePopup.close();
     })
@@ -121,12 +124,17 @@ Promise.all([api.getUserProfile(),api.getInitialCards()])
   });
 
 
-  const imagePopup = new PopupWithImage(popupImage);
-  const deletePopup = new PopupDelete(popupDelete);
-  /*(cardID) => {
+const imagePopup = new PopupWithImage(popupImage);
+const deletePopup = new PopupDelete(popupDelete, 
+  ({cardID, event}) => {
     api.deleteCard(cardID)
-    .then(data => console.log(data));
-  });*/
+    .then(
+      () => {
+        deletePopup.handleDelete(event);
+        deletePopup.close();
+      })
+  }
+);
 
 const cardValidation = new FormValidator(data, document.querySelector('[name="place"]'));
 const profileValidation = new FormValidator(data, document.querySelector('[name="edit"]'));
@@ -174,29 +182,19 @@ function likeClick(cardID, isLiked) {
     });
   }
 }
-/*       deletePopup.setNewFormSubmit(
-        api.deleteCard(cardID)
-        .then(
-          data => {console.log(data); card.handleDelete()}) */
-const aa =  function a(){
-  api.deleteCard(cardID)
-  .then(
-    data => {console.log(data); card.handleDelete()})
-}
-  
 
 // Создание и отображение карточки 
-function createNewCard({name, link, likes, cardID, ownerID, profileUserID} ) {
-  const card = new Card({name, link, likes , cardID, ownerID, profileUserID}, '.element-template', { 
+function createNewCard({name, link, likes, _id, owner}, profileUserID ) {
+  const card = new Card({name, link, likes , _id, owner}, profileUserID, '.element-template', { 
     handleCardClick: () => {
     imagePopup.open(name, link);
      },
-     handleDeleteClick: () => {
-       deletePopup.open(cardID);
-       deletePopup.setNewFormSubmit(aa); 
+     handleDeleteClick: (event) => {
+      deletePopup.open(_id);
+      deletePopup.setCardInfo(event);
     },
-    handleLikeClick: (cardID, isLiked) => {
-      likeClick(cardID, isLiked);
+    handleLikeClick: (_id, isLiked) => {
+      likeClick(_id, isLiked);
     }
   }); 
 return card.createCard();  

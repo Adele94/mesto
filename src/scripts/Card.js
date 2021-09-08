@@ -1,15 +1,15 @@
 
 class Card {
-    constructor(data, cardSelector, {handleCardClick, handleDeleteClick, handleLikeClick}) {
+    constructor(data, profileUserID, cardSelector, {handleCardClick, handleDeleteClick, handleLikeClick}) {
         this._cardSelector = cardSelector;
         this._title = data.name;
         this._link = data.link;
         this._alt = data.name;
         this._likes = data.likes;
         this._likesCount = this._likes.length;
-        this._ownerID = data.ownerID;
-        this._profileUserID = data.profileUserID;
-        this._cardID  = data.cardID;
+        this._ownerID = data.owner._id;
+        this._profileUserID = profileUserID;
+        this._id  = data._id;
         this._handleCardClick = handleCardClick;
         this._handleDeleteClick = handleDeleteClick;
         this._handleLikeClick = handleLikeClick;
@@ -47,7 +47,6 @@ class Card {
 
     handleDelete(event) {
         const itemElement = event.target.closest(".element");
-      
         itemElement.remove();
     }
 
@@ -65,7 +64,7 @@ class Card {
             this._likesCount-=1;
             this._cardElement.querySelector(".element__like-count").textContent = (this._likesCount!=0) ? this._likesCount : "" ;
 
-            this._handleLikeClick(this._cardID, false);
+            this._handleLikeClick(this._id, false);
         }
         else 
         {
@@ -73,15 +72,15 @@ class Card {
             this._likesCount+=1;
             this._cardElement.querySelector(".element__like-count").textContent = this._likesCount;
 
-            this._handleLikeClick(this._cardID, true);
+            this._handleLikeClick(this._id, true);
         }
         
     }
 
     _setEventListeners() {
         this._cardElement.querySelector(".element__image").addEventListener("click",() =>  this._handleCardClick());
-        this._cardElement.querySelector(".element__trash").addEventListener("click",(event) => this._handleDeleteClick()) // this._handleDelete);
-        this._cardElement.querySelector(".element__like").addEventListener("click",this._handleLike) // this._handleDelete);
+        this._cardElement.querySelector(".element__trash").addEventListener("click",(event) => this._handleDeleteClick(event));
+        this._cardElement.querySelector(".element__like").addEventListener("click",this._handleLike);
 
     }
 }
