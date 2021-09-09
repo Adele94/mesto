@@ -14,9 +14,10 @@ export default class UserInfo {
         return user; 
     }
     
-    setUserInfo(name, decription) {
+    setUserInfo(name, decription, avatarSrc) {
         const profile = document.querySelector(".profile");
         profile.querySelector(".profile__name").textContent = name;
         profile.querySelector(".profile__description").textContent = decription;
+        profile.querySelector(".profile__avatar").src = avatarSrc;
     }
 }

@@ -30,7 +30,7 @@ class Card {
                 this._cardElement.querySelector(".element__like").classList.add("element__like_active");
         });
 
-        if (this._likesCount != 0) this._cardElement.querySelector(".element__like-count").textContent = this._likesCount;
+        if (this._likesCount !== 0) this._cardElement.querySelector(".element__like-count").textContent = this._likesCount;
 
         this._setEventListeners();
         return this._cardElement;
@@ -50,33 +50,32 @@ class Card {
         itemElement.remove();
     }
 
-    _handleLike = (event) => {
-
-        const likeButton = event.target.closest(".element__like");
-
-        this._cardElement.querySelector(".element__like-count").textContent = this._likesCount + 1;
-        let isLiked = likeButton.classList.contains("element__like_active");
-        if (isLiked) {
-            likeButton.classList.remove("element__like_active");
+_handleLike = (event) => {
+    this._likeButton = event.target.closest(".element__like");
+    this._isLiked = this._likeButton.classList.contains("element__like_active");
+    this._handleLikeClick(this._isLiked)
+    .then(() => {
+        if (this._isLiked ) {
+            this._likeButton.classList.remove("element__like_active");
             this._likesCount -= 1;
-            this._cardElement.querySelector(".element__like-count").textContent = (this._likesCount != 0) ? this._likesCount : "";
-
-            this._handleLikeClick(false);
+            this._cardElement.querySelector(".element__like-count").textContent = (this._likesCount !== 0) ? this._likesCount: "";
         }
         else {
-            likeButton.classList.add("element__like_active");
+            this._likeButton.classList.add("element__like_active");
             this._likesCount += 1;
             this._cardElement.querySelector(".element__like-count").textContent = this._likesCount;
-
-            this._handleLikeClick(true);
         }
-
-    }
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
 
     _setEventListeners() {
         this._cardElement.querySelector(".element__image").addEventListener("click", () => this._handleCardClick());
         this._cardElement.querySelector(".element__trash").addEventListener("click", (event) => this._handleDeleteClick(event));
-        this._cardElement.querySelector(".element__like").addEventListener("click", this._handleLike);
+       // this._cardElement.querySelector(".element__like").addEventListener("click", this._handleLike);
+       this._cardElement.querySelector(".element__like").addEventListener("click", this._handleLike);
 
     }
 }

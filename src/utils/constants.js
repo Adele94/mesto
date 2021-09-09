@@ -8,14 +8,17 @@ export const profileAvatar = profile.querySelector(".profile__avatar");
 export const popupEdit = document.querySelector(".popup_type_edit");
 export const nameInput = popupEdit.querySelector(".popup__input_edit_name");
 export const descriptionInput = popupEdit.querySelector(".popup__input_edit_description");
+export const popupEditSubmitBtn = popupEdit.querySelector('[type="submit"]')
 
 
 export const popupPlace = document.querySelector(".popup_type_place");
+export const popupPlaceSubmitBtn = popupPlace.querySelector('[type="submit"]');
 
 export const popupImage = document.querySelector(".popup_type_picture");
 
 export const popupDelete = document.querySelector(".popup_type_delete-card");
 export const popupAvatar = document.querySelector(".popup_type_avatar");
+export const popupAvatarSubmitBtn = popupAvatar.querySelector('[type="submit"]')
 
 
 

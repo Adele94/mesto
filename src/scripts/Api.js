@@ -5,18 +5,20 @@ export default class Api {
     this.headers = options.headers;
   }
 
+  _getResponseData(res) {
+    if (!res.ok) {
+        return Promise.reject(`Ошибка: ${res.status}`); 
+    }
+    return res.json();
+}
+
   //получение массива карточек 
   getInitialCards() {
     return fetch(this.url + '/cards', {
       headers: this.headers
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       });
   }
 
@@ -27,12 +29,7 @@ export default class Api {
       method: 'GET'
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       });
   }
 
@@ -44,12 +41,7 @@ export default class Api {
       body: JSON.stringify(data)
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       });
   }
 
@@ -60,12 +52,7 @@ export default class Api {
       method: 'DELETE',
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       });
   }
 
@@ -80,12 +67,7 @@ export default class Api {
       })
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       });
   }
 
@@ -99,12 +81,7 @@ export default class Api {
       })
     })
       .then(res => {
-        if (res.ok) {
-          return res.json()
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       });
   }
 
@@ -115,12 +92,7 @@ export default class Api {
       method: method
     })
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
+        return this._getResponseData(res);
       });
   }
   // другие методы работы с API

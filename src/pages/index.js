@@ -1,9 +1,7 @@
 import '../pages/index.css';
-import {
-  listElements, profile, profileName,
-  profileDescription, profileAvatar, popupEdit, nameInput,
-  descriptionInput, popupPlace, popupImage, popupDelete, popupAvatar, data
-} from '../utils/constants.js';
+import { listElements, profile, popupEdit, popupEditSubmitBtn, nameInput,
+  descriptionInput, popupPlace, popupPlaceSubmitBtn, popupImage, popupDelete,
+  popupAvatar, popupAvatarSubmitBtn, data } from '../utils/constants.js';
 
 import PopupWithForm from '../scripts/PopupWithForm.js';
 import PopupWithImage from '../scripts/PopupWithImage.js';
@@ -31,9 +29,7 @@ const api = new Api({
 Promise.all([api.getUserProfile(), api.getInitialCards()])
   .then((result) => {
     const [userData, cardData] = result;
-    profileName.textContent = userData.name;
-    profileDescription.textContent = userData.about;
-    profileAvatar.src = userData.avatar;
+    user.setUserInfo(userData.name, userData.about, userData.avatar)
     profileUserID = userData._id;
 
     cardData.forEach(element => {
@@ -66,10 +62,10 @@ Promise.all([api.getUserProfile(), api.getInitialCards()])
 //добавляем новую карточку
 const placePopup = new PopupWithForm(popupPlace,
   (item) => {
-    popupPlace.querySelector('[type="submit"]').textContent = "Карточка создается...";
+    popupPlaceSubmitBtn.textContent = "Карточка создается...";
     api.addNewCard(item)
       .then((cardData) => {
-        popupPlace.querySelector('[type="submit"]').textContent = "Создать";
+        popupPlaceSubmitBtn.textContent = "Создать";
         const cardElement = createNewCard(cardData, profileUserID);
         cardList.addItem(cardElement);
         placePopup.close();
@@ -82,12 +78,12 @@ const placePopup = new PopupWithForm(popupPlace,
 //popup обновления аватара
 const avatarPopup = new PopupWithForm(popupAvatar,
   (item) => {
-    popupAvatar.querySelector('[type="submit"]').textContent = "Сохранение...";
+    popupAvatarSubmitBtn.textContent = "Сохранение...";
     api.updateAvatarProfile(item.link)
       .then(
         (data) => {
-          profileAvatar.src = data.avatar;
-          popupAvatar.querySelector('[type="submit"]').textContent = "Сохранить";
+          user.setUserInfo(data.name, data.about, data.avatar);
+          popupAvatarSubmitBtn.textContent = "Сохранить";
           avatarPopup.close();
         }
       )
@@ -99,12 +95,12 @@ const avatarPopup = new PopupWithForm(popupAvatar,
 //popup редактирования профиля
 const profilePopup = new PopupWithForm(popupEdit,
   (item) => {
-    popupEdit.querySelector('[type="submit"]').textContent = "Сохранение...";
+    popupEditSubmitBtn.textContent = "Сохранение...";
     //обновляем данные на  сервере
     api.updateUserProfile(item.name, item.description)
-      .then(() => {
-        user.setUserInfo(item.name, item.description);
-        popupEdit.querySelector('[type="submit"]').textContent = "Сохранить";
+      .then((data) => {
+        user.setUserInfo(data.name, data.about, data.avatar);
+        popupEditSubmitBtn.textContent = "Сохранить";
         profilePopup.close();
       })
       .catch((err) => {
@@ -123,6 +119,9 @@ const deletePopup = new PopupWithConfirmation(popupDelete,
           deletePopup.handleDelete();
           deletePopup.close();
         })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 );
 
@@ -141,32 +140,17 @@ function openPlaceModal() {
   cardValidation.resetValidation();
 }
 
-function openProfileModal() {
-  profilePopup.open();
-  nameInput.value = profileName.textContent;
-  descriptionInput.value = profileDescription.textContent;
-  profileValidation.resetValidation();
-}
-
 const user = new UserInfo({
   name: profile.querySelector(".profile__name"),
   description: profile.querySelector(".profile__description")
 });
 
-//отправка запроса на установку/снятие лайка
-function likeClick(cardID, isLiked) {
-  if (isLiked) {
-    api.renderLikes(cardID, 'PUT')
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  else {
-    api.renderLikes(cardID,'DELETE')
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+function openProfileModal() {
+  profilePopup.open();
+  const {name, description}  = user.getUserInfo();
+  nameInput.value = name.textContent; 
+  descriptionInput.value = description.textContent; 
+  profileValidation.resetValidation();
 }
 
 // Создание и отображение карточки 
@@ -180,7 +164,14 @@ function createNewCard(cardData, profileUserID) {
       deletePopup.setCardEvent(event);
     },
     handleLikeClick: (isLiked) => {
-      likeClick(cardData._id, isLiked);
+      //отправка запроса на установку/снятие лайка
+      if (!isLiked) {
+       return api.renderLikes(cardData._id, 'PUT');
+      }
+      else {
+       return api.renderLikes(cardData._id,'DELETE');
+      }
+
     }
   });
   return card.createCard();

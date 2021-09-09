@@ -4,6 +4,7 @@ export default class PopupWithConfirmation extends Popup {
   constructor(popupSelector, handleDelete) {
     super(popupSelector);
     this._handleDelete = handleDelete;
+    this.setEventListeners();
   }
 
   setCardEvent(event) {
@@ -29,7 +30,6 @@ export default class PopupWithConfirmation extends Popup {
 
   open(cardID) {
     this._cardID = cardID;
-    this.setEventListeners();
     super.open();
   }
 }
