@@ -74,8 +74,7 @@ _handleLike = (event) => {
     _setEventListeners() {
         this._cardElement.querySelector(".element__image").addEventListener("click", () => this._handleCardClick());
         this._cardElement.querySelector(".element__trash").addEventListener("click", (event) => this._handleDeleteClick(event));
-       // this._cardElement.querySelector(".element__like").addEventListener("click", this._handleLike);
-       this._cardElement.querySelector(".element__like").addEventListener("click", this._handleLike);
+        this._cardElement.querySelector(".element__like").addEventListener("click", this._handleLike);
 
     }
 }
